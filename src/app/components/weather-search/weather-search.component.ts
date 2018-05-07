@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
 import { WeatherItem } from './../../interfaces/weather-item';
+import 'rxjs';
 
 @Component({
 	selector: 'app-weather-search',
@@ -16,7 +17,7 @@ export class WeatherSearchComponent implements OnInit {
 	}
 	onSubmit(){
 		this.weatherService.searchWeatherData(this.city).subscribe(
-			data => {
+			(data) => {
 				const weatherItem: WeatherItem = {
 					'cityName': data['name'],
 					'description': data['weather'][0].description,
@@ -24,7 +25,11 @@ export class WeatherSearchComponent implements OnInit {
 				}
 				this.weatherService.addWeatherItem(weatherItem);
 			}
-		)
+		),
+		(error) => {
+			console.error(error);
+		}
+		
 	}
 
 }

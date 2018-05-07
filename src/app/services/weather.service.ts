@@ -15,10 +15,7 @@ export class WeatherService {
   }
   
   searchWeatherData(cityName: string){
-    return this.http.get('api.openweathermap.org/data/2.5/weather?q='+cityName+'&APPID='+ this.OPEN_WEATHER_APPID)
-    .catch((err): any => {
-      console.error(err);
-    })
+    return this.http.get('https://api.openweathermap.org/data/2.5/weather?q='+cityName+'&APPID='+ this.OPEN_WEATHER_APPID);
   }
 
   addWeatherItem(weatherItem: WeatherItem){
