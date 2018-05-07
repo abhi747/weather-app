@@ -22,6 +22,7 @@ export class WeatherSearchComponent implements OnInit {
 					'description': data['weather'][0].description,
 					'temperature': data['main'].temp
 				}
+				this.weatherService.addWeatherItem(weatherItem);
 			}
 		)
 	}
