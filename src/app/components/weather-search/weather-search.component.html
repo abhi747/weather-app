@@ -1,0 +1,13 @@
+<div class="container">
+  <form class="form-inline" [ngSubmit]="onSubmit()">
+    <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" id="city" required class="form-control" [(ngModel)]="city">
+    </div>
+    <button type="submit" class="btn btn-success">Add City</button>
+   
+  </form>
+  <div>
+    City found: City Name
+  </div>
+</div>
