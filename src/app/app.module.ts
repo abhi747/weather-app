@@ -19,9 +19,10 @@ import { WeatherSearchComponent } from './components/weather-search/weather-sear
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+      HttpClientModule
   ],
-  providers: [WeatherService],
+    providers: [WeatherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
