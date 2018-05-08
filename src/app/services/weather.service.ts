@@ -24,7 +24,8 @@ export class WeatherService {
         let url = `https://api.openweathermap.org/data/2.5/weather`;
         let params = new HttpParams();
         params = params.append('q', cityName);
-        params = params.append('APPID', this.OPEN_WEATHER_APPID);
+		params = params.append('APPID', this.OPEN_WEATHER_APPID);
+		params = params.append('units', 'metric');
 		return this.http.get(url, {params});
 	}
 

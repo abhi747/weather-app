@@ -1,11 +1,18 @@
-<li class="list-group-item">
-  <div class="row">
-    <div class="col">
-      <h3>{{weatherItem.cityName}}</h3>
-      <p>{{weatherItem.description}}</p>
-    </div>
-    <div class="col">
-      <span>{{weatherItem.temperature}} C</span>
-    </div>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+      <li class="list-group-item">
+        <div class="row">
+            <div class="col">
+                <h4>{{weatherItem.cityName}}</h4>
+                <p class="text-secondary">{{weatherItem.description | titlecase}}</p>
+              </div>
+              <div class="col">
+                <p class="text-right"><b>{{weatherItem.temperature}}&#730;C</b></p>
+              </div>
+        </div>
+      </li>
   </div>
-</li>
+  <div class="col-3"></div>
+</div>
+  
