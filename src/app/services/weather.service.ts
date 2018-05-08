@@ -4,8 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { URLSearchParams } from '@angular/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class WeatherService {
@@ -22,8 +21,11 @@ export class WeatherService {
 
 
 	searchWeatherData(cityName: string){
-		let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${this.OPEN_WEATHER_APPID}`;
-		return this.http.get(url);
+        let url = `https://api.openweathermap.org/data/2.5/weather`;
+        let params = new HttpParams();
+        params = params.append('q', cityName);
+        params = params.append('APPID', this.OPEN_WEATHER_APPID);
+		return this.http.get(url, {params});
 	}
 
 	addWeatherItem(weatherItem: WeatherItem){
