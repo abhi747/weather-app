@@ -12,24 +12,20 @@ export class WeatherSearchComponent implements OnInit {
 	city: string = '';
 	constructor(private weatherService: WeatherService) { }
 
-	ngOnInit() {
+	ngOnInit() {}
 
-	}
 	onSubmit(){
-		this.weatherService.searchWeatherData(this.city).subscribe(
-			(data) => {
+		var response = this.weatherService.searchWeatherData(this.city).subscribe(
+			(response) => {
 				const weatherItem: WeatherItem = {
-					'cityName': data['name'],
-					'description': data['weather'][0].description,
-					'temperature': data['main'].temp
+					'cityName': response['name'],
+					'description': response['weather'][0].description,
+					'temperature': response['main'].temp
 				}
 				this.weatherService.addWeatherItem(weatherItem);
-			}
-		),
-		(error) => {
-			console.error(error);
-		}
-		
+			},
+			(error) => this.weatherService.handleError(error)
+		);
 	}
 
 }
