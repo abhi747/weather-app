@@ -6,9 +6,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
+import { environment } from '../../environments/environment.prod';
+
 @Injectable()
 export class WeatherService {
-	private OPEN_WEATHER_APPID: string = '00e66b28da5ffe7b45d077a2a6e7b278';
+	private OPEN_WEATHER_APPID: string = environment.OPEN_WEATHER_APPID;
 	constructor(public http: HttpClient) { }
 
 	handleError(err) {
@@ -32,5 +34,7 @@ export class WeatherService {
 	addWeatherItem(weatherItem: WeatherItem){
 		WEATHER_ITEMS.push(weatherItem);
 	}
-
+	removeWeatherItem(index: number){
+		WEATHER_ITEMS.splice(index,1);
+	}
 }

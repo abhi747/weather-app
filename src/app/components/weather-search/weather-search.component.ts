@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
 import { WeatherItem } from './../../interfaces/weather-item';
-import 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-weather-search',
@@ -9,10 +9,12 @@ import 'rxjs';
 	styleUrls: ['./weather-search.component.css']
 })
 export class WeatherSearchComponent implements OnInit {
-	city: string = '';
-	constructor(private weatherService: WeatherService) { }
 
-	ngOnInit() {}
+	private city: string = '';
+	private data: any = {};
+	private searchStream = new Subject<string>();
+
+	constructor(private weatherService: WeatherService) { }
 
 	onSubmit(){
 		var response = this.weatherService.searchWeatherData(this.city).subscribe(
@@ -26,6 +28,24 @@ export class WeatherSearchComponent implements OnInit {
 			},
 			(error) => this.weatherService.handleError(error)
 		);
+	}
+	onCityChange(){
+		if(this.city)
+			this.searchStream.next(this.city);
+		else
+			this.data = {};
+	}
+	ngOnInit() {
+		this.searchStream
+		.debounceTime(300)
+		.distinctUntilChanged()
+		.switchMap((input: string) => this.weatherService.searchWeatherData(input))
+		.subscribe(
+			(data) => this.data = data,
+			(err) => {
+				console.error(err);
+				this.data = {};
+			})
 	}
 
 }

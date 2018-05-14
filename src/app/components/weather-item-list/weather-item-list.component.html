@@ -1,3 +1,5 @@
 <ul class="list-group">
-	<app-weather-item *ngFor="let weatherItem of weatherItems" [weatherItem]="weatherItem"></app-weather-item>
+	<app-weather-item *ngFor="let weatherItem of weatherItems; let i=index" 
+		[weatherItem]="weatherItem" [weatherItemIndex]="i">
+	</app-weather-item>
 </ul>

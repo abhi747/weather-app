@@ -9,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./weather-item-list.component.css']
 })
 export class WeatherItemListComponent implements OnInit {
+	
 	weatherItems: WeatherItem[];
+
 	constructor(private weatherService: WeatherService) { }
 
 	ngOnInit() {

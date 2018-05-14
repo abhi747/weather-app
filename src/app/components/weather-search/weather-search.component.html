@@ -1,14 +1,15 @@
 <form (ngSubmit)="onSubmit()" style="margin: 15px 0px;">
 	<div class="row">
-		<div class="col-3"></div>
-		<div class="col-6">
+		<div class="col-6 mid">
 			<div class="input-group">
-				<input type="text" id="city" name="city" placeholder="Enter City" required class="form-control" [(ngModel)]="city">
+				<input type="text" id="city" name="city" placeholder="Enter City" required class="form-control" [(ngModel)]="city" (ngModelChange)="onCityChange();">
 				<span class="input-group-btn">
 					<button type="submit" class="btn btn-success">Add City</button>
 				</span>
 			</div>
 		</div>
-		<div class="col-3"></div>
+	</div>
+	<div class="col-3 mid">
+		City found: <b>{{data.name}}</b>
 	</div>
 </form>

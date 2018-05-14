@@ -1,7 +1,9 @@
 <div class="row">
-  <div class="col-3"></div>
-  <div class="col-6">
+  <div class="col-6 mid">
       <li class="list-group-item">
+          <button type="button" class="close" aria-label="Close" (click)=removeWeatherItem(index);>
+              <span aria-hidden="true">&times;</span>
+            </button>
         <div class="row">
             <div class="col">
                 <h5>{{weatherItem.cityName}}</h5>
@@ -13,6 +15,5 @@
         </div>
       </li>
   </div>
-  <div class="col-3"></div>
 </div>
   
