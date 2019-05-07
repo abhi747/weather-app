@@ -3,9 +3,9 @@ import { WeatherItem } from "./../interfaces/weather-item";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
-import "rxjs";
-import { HttpClient, HttpParams } from "@angular/common/http";
-
+import "rxjs/add/operator/catch";
+import { HttpClient, HttpParams, HttpErrorResponse } from "@angular/common/http";
+import { throwError } from 'rxjs';
 import { environment } from "../../environments/environment.prod";
 
 @Injectable()
@@ -13,8 +13,9 @@ export class WeatherService {
   private OPEN_WEATHER_APPID: string = environment.OPEN_WEATHER_APPID;
   constructor(public http: HttpClient) {}
 
-  handleError(err) {
+  handleError(err: HttpErrorResponse) {
     alert(err.error.message);
+    return throwError(err.message || 'Server error');
   }
 
   getWeatherItems(): WeatherItem[] {
@@ -27,7 +28,8 @@ export class WeatherService {
     params = params.append("q", cityName);
     params = params.append("APPID", this.OPEN_WEATHER_APPID);
     params = params.append("units", "metric");
-    return this.http.get(url, { params });
+    return this.http.get(url, { params }).
+      catch(this.handleError);
   }
 
   addWeatherItem(weatherItem: WeatherItem) {

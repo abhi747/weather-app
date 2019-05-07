@@ -27,7 +27,9 @@ export class WeatherSearchComponent implements OnInit {
 				}
 				this.weatherService.addWeatherItem(weatherItem);
 			},
-			(error) => this.weatherService.handleError(error)
+			(error) => {
+				this.weatherService.handleError(error)
+			}
 		);
 	}
 	onCityChange(){
@@ -37,17 +39,22 @@ export class WeatherSearchComponent implements OnInit {
 			this.data = {};
 	}
 	ngOnInit() {
+		this.searchWeatherData();
+	}
+	
+	searchWeatherData() {
 		this.searchStream
 		.pipe(
-			debounceTime(300),
+			debounceTime(400),
 			distinctUntilChanged(),
 			switchMap((input: string) => this.weatherService.searchWeatherData(input)))
 			.subscribe(
 				(data) => this.data = data,
 				(err) => {
-					console.error(err);
 					this.data = {};
+					this.searchWeatherData();
 				})
+		
 	}
 
 }

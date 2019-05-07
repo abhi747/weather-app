@@ -4,12 +4,12 @@
 			<div class="input-group">
 				<input type="text" id="city" name="city" placeholder="Enter City" required class="form-control" [(ngModel)]="city" (ngModelChange)="onCityChange();">
 				<span class="input-group-btn">
-					<button type="submit" class="btn btn-success">Add City</button>
+					<button type="submit" class="btn btn-success" [disabled]="!data.name">Add City</button>
 				</span>
 			</div>
 		</div>
 	</div>
 	<div class="col-3 mid">
-		City found: <b>{{data.name}}</b>
+		City found: <b>{{data.name | titlecase}}</b>
 	</div>
 </form>
