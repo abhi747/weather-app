@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
 import { WeatherItem } from './../../interfaces/weather-item';
 import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators'
 
 @Component({
 	selector: 'app-weather-search',
@@ -37,15 +38,16 @@ export class WeatherSearchComponent implements OnInit {
 	}
 	ngOnInit() {
 		this.searchStream
-		.debounceTime(300)
-		.distinctUntilChanged()
-		.switchMap((input: string) => this.weatherService.searchWeatherData(input))
-		.subscribe(
-			(data) => this.data = data,
-			(err) => {
-				console.error(err);
-				this.data = {};
-			})
+		.pipe(
+			debounceTime(300),
+			distinctUntilChanged(),
+			switchMap((input: string) => this.weatherService.searchWeatherData(input)))
+			.subscribe(
+				(data) => this.data = data,
+				(err) => {
+					console.error(err);
+					this.data = {};
+				})
 	}
 
 }
