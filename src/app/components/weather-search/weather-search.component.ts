@@ -11,9 +11,9 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators'
 })
 export class WeatherSearchComponent implements OnInit {
 
-	private city: string = '';
-	private data: any = {};
-	private searchStream = new Subject<string>();
+	 city: string = '';
+	 data: any = {};
+	 searchStream = new Subject<string>();
 
 	constructor(private weatherService: WeatherService) { }
 
